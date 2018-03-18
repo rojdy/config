@@ -1,0 +1,49 @@
+[color]
+    ui = auto
+
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    fp = format-patch
+    lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative
+    ll = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative -10
+    wdiff = diff --word-diff=color --word-diff-regex=.
+    rbd = !git checkout develop && git fetch origin && git rebase origin/develop && git ll && git status
+    rbm = !git checkout master && git fetch origin && git rebase origin/master && git ll && git status
+    pr = !git checkout master && git fetch origin && git rebase origin/master && git branch -D $1  || true && git checkout -t origin/$1 && git ll && git status
+
+[core]
+    pager = cat
+	excludesfile = /home/rojdy/.gitignore_global
+    #editor =
+
+[rerere]
+    enabled = 0
+
+[merge]
+    conflictstyle = diff3
+    renormalize = 1
+
+#[branch]
+#    autosetuprebase = local
+
+[grep]
+    linenumber = true
+
+[diff]
+    mnemonicprefix = true
+
+[diff "localizablestrings"]
+    textconv = "iconv -f utf-16 -t utf-8"
+
+[rebase]
+    preserve = true
+
+[pull]
+    rebase = preserve
+
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
